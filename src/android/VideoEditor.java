@@ -160,6 +160,14 @@ public class VideoEditor extends CordovaPlugin {
             }
         }
 
+        try {
+            final File outputFile = File.createTempFile(outputFileName, outputExtension, mediaStorageDir);
+        } catch (IOException e) {
+            Log.e(TAG, "Failed to create output file", e);
+            callback.error("Can't create output file");
+                return;
+        }
+
         final String outputFilePath = new File(
                 mediaStorageDir.getPath(),
                 outputFileName + outputExtension
@@ -240,7 +248,7 @@ public class VideoEditor extends CordovaPlugin {
                     float videoHeight = Float.parseFloat(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT));
 
                     MediaTranscoder.getInstance().transcodeVideo(fin.getFD(), outputFilePath,
-                            new CustomAndroidFormatStrategy(videoBitrate, fps, width, height), listener, videoDuration);
+                            new CustomAndroidFormatStrategy(videoBitrate, fps, width, height), listener);
 
                 } catch (Throwable e) {
                     Log.d(TAG, "transcode exception ", e);
