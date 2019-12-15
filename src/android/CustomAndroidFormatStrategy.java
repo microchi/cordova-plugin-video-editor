@@ -37,6 +37,7 @@ public class CustomAndroidFormatStrategy implements MediaFormatStrategy {
         this.height = height;
     }
 
+    @Override
     public MediaFormat createVideoOutputFormat(MediaFormat inputFormat) {
         int inWidth = inputFormat.getInteger(MediaFormat.KEY_WIDTH);
         int inHeight = inputFormat.getInteger(MediaFormat.KEY_HEIGHT);
@@ -85,6 +86,7 @@ public class CustomAndroidFormatStrategy implements MediaFormatStrategy {
 
     }
 
+    @Override
     public MediaFormat createAudioOutputFormat(MediaFormat inputFormat) {
         return null;
     }
